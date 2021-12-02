@@ -9,6 +9,14 @@ function init(entryTable) {
     console.log("sending", all)
     res.send(all);
   });
+
+  router.post('/submit', async (req, res) => {
+    const { url, title, address } = req.body;
+    console.log("got a new submission", url, title, address);
+    // verify the data that was sent
+    const added = await entryTable.addEntry(title, address, url);
+    res.send(added)
+  })
   
   return router;
 }
