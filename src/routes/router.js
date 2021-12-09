@@ -10,6 +10,15 @@ function init(entryTable) {
     res.send(all);
   });
 
+  router.get('/:id', async (req, res) => {
+    console.log("Getting entry");
+    const { id } = req.params;
+    console.log("Entry to get", id)
+
+    const entry = await entryTable.getEntry(id);
+    res.send(entry);
+  })
+
   router.post('/submit', async (req, res) => {
     const { url, title, address } = req.body;
     console.log("got a new submission", url, title, address);
