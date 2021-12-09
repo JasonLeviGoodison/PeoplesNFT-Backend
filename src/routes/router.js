@@ -14,8 +14,16 @@ function init(entryTable) {
     console.log("Getting entry");
     const { id } = req.params;
     console.log("Entry to get", id)
+    let entry;
+    
+    console.log("about to get it")
+    entry = await entryTable.getEntry(id);
+    console.log("got it")
 
-    const entry = await entryTable.getEntry(id);
+    if (entry == null) {
+      return res.sendStatus(404)
+    }
+    console.log("Sending entry", entry)
     res.send(entry);
   })
 
